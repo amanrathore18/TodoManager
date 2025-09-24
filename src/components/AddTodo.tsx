@@ -13,7 +13,7 @@ const AddTodo = () => {
   const [text, setText] = useState('');
 
   const handleAdd = async () => {
-    await addTodo(text);
+    await addTodo(text.trim());
     setText('');
   };
 
@@ -25,6 +25,8 @@ const AddTodo = () => {
         placeholderTextColor="#aaa"
         value={text}
         onChangeText={setText}
+        returnKeyType="done"
+        onSubmitEditing={handleAdd}
       />
       <TouchableOpacity style={styles.button} onPress={handleAdd}>
         <Text style={styles.buttonText}>＋</Text>

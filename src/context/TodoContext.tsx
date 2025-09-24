@@ -15,6 +15,7 @@ type TodoContextType = {
   addTodo: (title: string) => Promise<void>;
   toggleTodo: (id: string) => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
+  updateTodo: (id: string, newTitle: string) => Promise<void>;
 };
 
 const STORAGE_KEY = 'TODO_LIST';
@@ -48,7 +49,6 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     return result.success;
   };
 
-  // ✅ Add todo with validation
   // ✅ Add todo with validation + duplicate check
   const addTodo = async (title: string) => {
     const trimmed = title.trim();
@@ -112,8 +112,24 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     setTodos(prev => prev.filter(todo => todo.id !== id));
   };
 
+  const updateTodo = async (id: string, newTitle: string) => {
+    if (!(await authenticate())) return;
+
+    const exists = todos.find(todo => todo.id === id);
+    if (!exists) {
+      Alert.alert('Error', 'Todo not found');
+      return;
+    }
+
+    setTodos(prev =>
+      prev.map(todo => (todo.id === id ? { ...todo, title: newTitle } : todo)),
+    );
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, toggleTodo, deleteTodo }}>
+    <TodoContext.Provider
+      value={{ todos, addTodo, toggleTodo, deleteTodo, updateTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );
