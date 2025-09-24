@@ -21,6 +21,8 @@ Tasks are saved with created date & time, secured with local authentication, and
 - Secure actions with Local Authentication
 - Persistent storage with AsyncStorage
 
+Note: Expo local authentication working is not recorded because of security feature supported by device.
+
 ---
 
 ## Demo Videos
