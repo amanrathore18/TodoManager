@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from 'react-native';
 import { useTodo } from '../context/TodoContext';
 
 const AddTodo = () => {
@@ -7,7 +13,6 @@ const AddTodo = () => {
   const [text, setText] = useState('');
 
   const handleAdd = async () => {
-    if (!text.trim()) return;
     await addTodo(text);
     setText('');
   };
@@ -16,24 +21,46 @@ const AddTodo = () => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter new TODO"
+        placeholder="Add a new task..."
+        placeholderTextColor="#aaa"
         value={text}
         onChangeText={setText}
       />
-      <Button title="Add" onPress={handleAdd} />
+      <TouchableOpacity style={styles.button} onPress={handleAdd}>
+        <Text style={styles.buttonText}>＋</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', marginBottom: 20 },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f1f3f6',
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
   input: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginRight: 8,
-    borderRadius: 4,
+    fontSize: 16,
+    paddingHorizontal: 8,
+    color: '#333',
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 8,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 });
 

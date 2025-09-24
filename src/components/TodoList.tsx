@@ -4,7 +4,7 @@ import { useTodo } from '../context/TodoContext';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-  const { todos } = useTodo();
+  const { todos, toggleTodo, deleteTodo } = useTodo();
 
   return (
     <View style={styles.container}>
@@ -14,7 +14,13 @@ const TodoList = () => {
         <FlatList
           data={todos}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <TodoItem todo={item} />}
+          renderItem={({ item }) => (
+            <TodoItem
+              deleteTodo={deleteTodo}
+              toggleTodo={toggleTodo}
+              todo={item}
+            />
+          )}
         />
       )}
     </View>
