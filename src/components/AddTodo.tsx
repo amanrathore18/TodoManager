@@ -21,7 +21,7 @@ const AddTodo = () => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Add a new task..."
+        placeholder="Type your task here..."
         placeholderTextColor="#aaa"
         value={text}
         onChangeText={setText}

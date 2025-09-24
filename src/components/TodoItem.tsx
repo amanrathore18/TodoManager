@@ -6,21 +6,26 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { useTodo } from '../context/TodoContext';
 
 type Props = {
+  deleteTodo: (id: string) => void;
+  toggleTodo: (id: string) => void;
+  updateTodo: (id: string, newTitle: string) => void;
   todo: {
     id: string;
     title: string;
     completed: boolean;
-    createdAt: string;
+    createdAt: Date;
   };
 };
 
-const TodoItem: React.FC<Props> = ({ todo }) => {
-  console.log('🚀 ~ TodoItem ~ todo:', todo);
+const TodoItem: React.FC<Props> = ({
+  todo,
+  deleteTodo,
+  updateTodo,
+  toggleTodo,
+}) => {
   const { id, title, completed, createdAt } = todo;
-  const { toggleTodo, deleteTodo, updateTodo } = useTodo();
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 

@@ -4,7 +4,7 @@ import { useTodo } from '../context/TodoContext';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-  const { todos, toggleTodo, deleteTodo } = useTodo();
+  const { todos, toggleTodo, deleteTodo, updateTodo } = useTodo();
 
   return (
     <View style={styles.container}>
@@ -18,6 +18,7 @@ const TodoList = () => {
             <TodoItem
               deleteTodo={deleteTodo}
               toggleTodo={toggleTodo}
+              updateTodo={updateTodo}
               todo={item}
             />
           )}
