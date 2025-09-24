@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 
 type Props = {
@@ -36,6 +37,18 @@ const TodoItem: React.FC<Props> = ({
     setIsEditing(false);
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Task',
+      'Are you sure you want to delete this task?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: () => deleteTodo(id) },
+      ],
+      { cancelable: true },
+    );
+  };
+
   return (
     <View style={[styles.card, completed && styles.completedCard]}>
       <TouchableOpacity
@@ -58,6 +71,7 @@ const TodoItem: React.FC<Props> = ({
         <Text
           style={[styles.title, completed && styles.titleDone]}
           onPress={() => setIsEditing(true)}
+          numberOfLines={1}
         >
           {title}
         </Text>
@@ -72,7 +86,7 @@ const TodoItem: React.FC<Props> = ({
         • {new Date(createdAt).toLocaleDateString()}
       </Text>
 
-      <TouchableOpacity style={styles.deleteBtn} onPress={() => deleteTodo(id)}>
+      <TouchableOpacity style={styles.deleteBtn} onPress={handleDelete}>
         <Text style={styles.deleteText}>✕</Text>
       </TouchableOpacity>
     </View>
