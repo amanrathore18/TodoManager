@@ -86,7 +86,11 @@ const TodoItem: React.FC<Props> = ({
         • {new Date(createdAt).toLocaleDateString()}
       </Text>
 
-      <TouchableOpacity style={styles.deleteBtn} onPress={handleDelete}>
+      <TouchableOpacity
+        style={styles.deleteBtn}
+        onPress={handleDelete}
+        accessibilityLabel={`delete-button-${id}`}
+      >
         <Text style={styles.deleteText}>✕</Text>
       </TouchableOpacity>
     </View>

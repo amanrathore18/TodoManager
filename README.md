@@ -39,8 +39,8 @@ Note: Expo local authentication working is not recorded because of security feat
 1. Clone the repository
 
    ```bash
-   git clone <repo-url>
-   cd <repo-folder>
+   git clone https://github.com/amanrathore18/TodoManager.git
+   cd TodoManager
    ```
 
 2. Install dependencies
