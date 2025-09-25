@@ -9,11 +9,7 @@ const TodoList = () => {
 
   return (
     <View style={styles.container}>
-      {/* Show empty message when no todos exist */}
-      {todos.length === 0 ? (
-        <Text style={styles.empty}>No TODOs yet. Add one!</Text>
-      ) : (
-        //* Render list of todos
+      {todos.length ? ( //* Render list of todos
         <FlatList
           data={todos}
           keyExtractor={item => item.id}
@@ -26,6 +22,9 @@ const TodoList = () => {
             />
           )}
         />
+      ) : (
+        //*  Show empty message when no todos exist
+        <Text style={styles.empty}>No TODOs yet. Add one!</Text>
       )}
     </View>
   );

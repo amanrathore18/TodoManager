@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import { formatDateTime } from 'src/utils/formatDate';
 
 type Props = {
   deleteTodo: (id: string) => void;
@@ -83,14 +84,7 @@ const TodoItem: React.FC<Props> = ({
       )}
 
       {/* Task creation time + date */}
-      <Text style={styles.date}>
-        {new Date(createdAt).toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true,
-        })}{' '}
-        • {new Date(createdAt).toLocaleDateString()}
-      </Text>
+      <Text style={styles.date}>{formatDateTime(createdAt)}</Text>
 
       {/* Delete button */}
       <TouchableOpacity
