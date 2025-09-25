@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { useTodo } from '../context/TodoContext';
-import TodoItem from './TodoItem';
+import { useTodo } from 'src/context/TodoContext';
+import TodoItem from 'src/components/TodoItem';
 
 //* TodoList Component: Displays all todos or an empty state message.
 const TodoList = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import AddTodo from '../components/AddTodo';
-import TodoList from '../components/TodoList';
+import AddTodo from 'src/components/AddTodo';
+import TodoList from 'src/components/TodoList';
 
 //* Home screen layout: Combines AddTodo (input) and TodoList (display) components
 const HomeScreen = () => {

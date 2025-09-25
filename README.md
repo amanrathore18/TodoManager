@@ -62,13 +62,6 @@ Note: Expo local authentication working is not recorded because of security feat
 
 ---
 
-## Download
-
-Test the app directly on Android:  
-[Download APK](https://your-android-apk-link)
-
----
-
 ## Tech Stack
 
 - React Native CLI
@@ -77,7 +70,3 @@ Test the app directly on Android:
 - Expo Local Authentication
 
 ---
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
