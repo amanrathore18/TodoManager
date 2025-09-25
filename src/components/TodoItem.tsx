@@ -20,6 +20,8 @@ type Props = {
   };
 };
 
+//* TodoItem Component: Displays a single todo with options to
+//* mark as complete, edit title, and delete.
 const TodoItem: React.FC<Props> = ({
   todo,
   deleteTodo,
@@ -30,6 +32,7 @@ const TodoItem: React.FC<Props> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
+  //* Save updated title when user finishes editing
   const handleSave = async () => {
     if (newTitle.trim() && newTitle !== title) {
       await updateTodo(id, newTitle.trim());
@@ -37,6 +40,7 @@ const TodoItem: React.FC<Props> = ({
     setIsEditing(false);
   };
 
+  //* Confirm delete action with an Alert
   const handleDelete = () => {
     Alert.alert(
       'Delete Task',
@@ -51,6 +55,7 @@ const TodoItem: React.FC<Props> = ({
 
   return (
     <View style={[styles.card, completed && styles.completedCard]}>
+      {/* Toggle completion circle */}
       <TouchableOpacity
         style={[styles.circle, completed && styles.circleDone]}
         onPress={() => toggleTodo(id)}
@@ -70,13 +75,14 @@ const TodoItem: React.FC<Props> = ({
       ) : (
         <Text
           style={[styles.title, completed && styles.titleDone]}
-          onPress={() => setIsEditing(true)}
+          onPress={() => setIsEditing(true)} //* tap to enable editing
           numberOfLines={1}
         >
           {title}
         </Text>
       )}
 
+      {/* Task creation time + date */}
       <Text style={styles.date}>
         {new Date(createdAt).toLocaleTimeString([], {
           hour: '2-digit',
@@ -86,6 +92,7 @@ const TodoItem: React.FC<Props> = ({
         • {new Date(createdAt).toLocaleDateString()}
       </Text>
 
+      {/* Delete button */}
       <TouchableOpacity
         style={styles.deleteBtn}
         onPress={handleDelete}

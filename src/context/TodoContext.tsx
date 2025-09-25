@@ -27,7 +27,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  // Load todos on app start
+  //* Load todos from local storage when app starts
   useEffect(() => {
     (async () => {
       const stored = await AsyncStorage.getItem(STORAGE_KEY);
@@ -35,12 +35,12 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     })();
   }, []);
 
-  // Save todos whenever they change
+  //* Persist todos in local storage whenever they change
   useEffect(() => {
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  // Authenticate before actions
+  //* Authenticate user before performing sensitive actions
   const authenticate = async (): Promise<boolean> => {
     const result = await LocalAuthentication.authenticateAsync({
       promptMessage: 'Authenticate to manage your TODOs',
@@ -49,7 +49,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     return result.success;
   };
 
-  // ✅ Add todo with validation + duplicate check
+  //* Add a new todo with validation + duplicate check
   const addTodo = async (title: string) => {
     const trimmed = title.trim();
     if (!trimmed) {
@@ -57,7 +57,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    // check duplicate (case-insensitive)
+    //* check duplicate (case-insensitive)
     const duplicate = todos.find(
       t => t.title.toLowerCase() === trimmed.toLowerCase(),
     );
@@ -82,7 +82,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     ]);
   };
 
-  // ✅ Toggle todo with validation
+  //* Toggle completion state of a todo
   const toggleTodo = async (id: string) => {
     if (!(await authenticate())) return;
 
@@ -99,7 +99,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
-  // ✅ Delete todo with validation
+  //* Delete a todo
   const deleteTodo = async (id: string) => {
     if (!(await authenticate())) return;
 
@@ -112,6 +112,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     setTodos(prev => prev.filter(todo => todo.id !== id));
   };
 
+  //* Update todo title
   const updateTodo = async (id: string, newTitle: string) => {
     if (!(await authenticate())) return;
 
@@ -135,6 +136,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
+//* Hook for accessing todo context safely
 export const useTodo = () => {
   const context = useContext(TodoContext);
   if (!context) throw new Error('useTodo must be used within TodoProvider');

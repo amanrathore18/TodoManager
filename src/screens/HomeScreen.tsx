@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 
+//* Home screen layout: Combines AddTodo (input) and TodoList (display) components
 const HomeScreen = () => {
   return (
     <View style={styles.container}>

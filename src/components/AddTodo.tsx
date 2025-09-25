@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { useTodo } from '../context/TodoContext';
 
+//* AddTodo Component: Allows user to type and add new todo items.
+//* Uses TodoContext to update the shared todo list state.
 const AddTodo = () => {
   const { addTodo } = useTodo();
   const [text, setText] = useState('');

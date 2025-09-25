@@ -3,14 +3,17 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useTodo } from '../context/TodoContext';
 import TodoItem from './TodoItem';
 
+//* TodoList Component: Displays all todos or an empty state message.
 const TodoList = () => {
   const { todos, toggleTodo, deleteTodo, updateTodo } = useTodo();
 
   return (
     <View style={styles.container}>
+      {/* Show empty message when no todos exist */}
       {todos.length === 0 ? (
         <Text style={styles.empty}>No TODOs yet. Add one!</Text>
       ) : (
+        //* Render list of todos
         <FlatList
           data={todos}
           keyExtractor={item => item.id}
